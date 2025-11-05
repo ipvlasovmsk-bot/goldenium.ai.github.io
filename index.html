@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>AI Боты под ключ — Goldenium 🤖 Автоматизация бизнеса с ИИ</title>
-<meta name="description" content="Внедряем умные AI-боты в ваш бизнес за 1 день. Telegram-боты, голосовые помощники, интеграции. Экономьте до 3 сотрудников!" />
-<meta property="og:title" content="AI Боты под ключ — Goldenium 🤖 Автоматизация бизнеса" />
-<meta property="og:description" content="Telegram-боты с ИИ, голосовые помощники, интеграции. Замена 1-3 сотрудников AI-системами" />
+<title>AI Bots Turnkey — Goldenium 🤖 Business Automation with AI</title>
+<meta name="description" content="Implement smart AI bots in your business in 1 day. Telegram bots, voice assistants, integrations. Save up to 3 employees!" />
+<meta property="og:title" content="AI Bots Turnkey — Goldenium 🤖 Business Automation" />
+<meta property="og:description" content="Telegram bots with AI, voice assistants, integrations. Replacement of 1-3 employees with AI systems" />
 <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/616/616408.png" />
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/616/616408.png" />
 <style>
@@ -122,6 +122,14 @@
   .mb-20{margin-bottom:20px}
   .mt-30{margin-top:30px}
   
+  /* Contact Buttons */
+  .contact-buttons{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+  .contact-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 20px;border-radius:10px;font-weight:600;text-decoration:none;transition:all 0.3s;font-size:15px;flex:1;min-width:140px;justify-content:center}
+  .whatsapp-btn{background:#25D366;color:#fff;box-shadow:0 2px 8px rgba(37,211,102,0.3)}
+  .whatsapp-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(37,211,102,0.4);background:#20BD5C}
+  .telegram-btn{background:#0088cc;color:#fff;box-shadow:0 2px 8px rgba(0,136,204,0.3)}
+  .telegram-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,136,204,0.4);background:#0077B5}
+  
   /* Animations */
   .fade{animation:fade .6s ease both}
   @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
@@ -145,6 +153,8 @@
     .features{grid-template-columns:1fr}
     .benefits{grid-template-columns:1fr}
     .testimonials{grid-template-columns:1fr}
+    .contact-buttons{flex-direction:column}
+    .contact-btn{min-width:100%}
   }
 </style>
 </head>
@@ -154,8 +164,8 @@
     <div class="brand">
       <div class="logo">AI</div>
       <div>
-        <h1>Goldenium AI Solutions</h1>
-        <div class="small">Корпоративная автоматизация · AI-боты · Бизнес-процессы</div>
+        <h1 id="companyName">Goldenium AI Solutions</h1>
+        <div class="small" id="companyTagline">Corporate Automation · AI Bots · Business Processes</div>
       </div>
     </div>
 
@@ -165,7 +175,7 @@
         <button class="langbtn" data-lang="en">EN</button>
         <button class="langbtn" data-lang="es">ES</button>
       </div>
-      <div class="settings" id="settingsBtn" title="Настройки">⚙</div>
+      <div class="settings" id="settingsBtn" title="Settings">⚙</div>
     </div>
   </header>
 
@@ -173,58 +183,69 @@
   <section class="hero">
     <div>
       <div class="card fade">
-        <div class="badge">🚀 ВНЕДРЕНИЕ ЗА 24 ЧАСА</div>
-        <h2 id="title">Корпоративная автоматизация с искусственным интеллектом</h2>
-        <p class="lead" id="subtitle">Внедряем AI-решения для автоматизации бизнес-процессов. <strong>Снижаем операционные расходы на 40%</strong> по данным наших клиентов</p>
+        <div class="badge" id="implementationBadge">🚀 IMPLEMENTATION IN 24 HOURS</div>
+        <h2 id="title">Corporate Automation with Artificial Intelligence</h2>
+        <p class="lead" id="subtitle">We implement AI solutions for business process automation. <strong>Reduce operational costs by 40%</strong> according to our clients' data</p>
 
         <div class="stats">
           <div class="stat">
             <div class="stat-number">-40%</div>
-            <div class="stat-label">Операционные расходы</div>
+            <div class="stat-label" id="stat1">Operational costs</div>
           </div>
           <div class="stat">
             <div class="stat-number">24/7</div>
-            <div class="stat-label">Автоматизация процессов</div>
+            <div class="stat-label" id="stat2">Process automation</div>
           </div>
           <div class="stat">
-            <div class="stat-number">1 день</div>
-            <div class="stat-label">Срок внедрения</div>
+            <div class="stat-number">1 day</div>
+            <div class="stat-label" id="stat3">Implementation time</div>
           </div>
           <div class="stat">
             <div class="stat-number">1-3</div>
-            <div class="stat-label">FTE экономия</div>
+            <div class="stat-label" id="stat4">FTE savings</div>
           </div>
         </div>
 
         <form id="leadForm" class="fade">
           <div class="row">
-            <input type="text" id="clientName" placeholder="Ваше имя" required />
-            <input type="tel" id="clientPhone" placeholder="+7 900 000-00-00" required />
+            <input type="text" id="clientName" placeholder="Your name" required />
+            <input type="tel" id="clientPhone" placeholder="+1 555 000 0000" required />
           </div>
           <div class="row">
             <select id="businessType">
-              <option value="production">Производство</option>
-              <option value="logistics">Логистика и транспорт</option>
-              <option value="retail">Оптово-розничная торговля</option>
-              <option value="construction">Строительство и аренда</option>
-              <option value="medical">Медицина и лаборатории</option>
-              <option value="education">Образование и консалтинг</option>
-              <option value="services">Услуги и B2B</option>
-              <option value="beauty">Бьюти-индустрия</option>
-            </select>
-            <select id="currency" style="max-width:160px">
-              <option value="RUB">₽ RUB</option>
-              <option value="USD">$ USD</option>
-              <option value="EUR">€ EUR</option>
+              <option value="production">Production</option>
+              <option value="logistics">Logistics and transport</option>
+              <option value="retail">Wholesale and retail trade</option>
+              <option value="construction">Construction and rental</option>
+              <option value="medical">Medicine and laboratories</option>
+              <option value="education">Education and consulting</option>
+              <option value="services">Services and B2B</option>
+              <option value="beauty">Beauty industry</option>
             </select>
           </div>
-          <textarea id="note" placeholder="Опишите задачу для автоматизации..."></textarea>
+          <textarea id="note" placeholder="Describe your automation task..."></textarea>
+          
+          <!-- Contact Buttons -->
+          <div class="contact-buttons">
+            <a href="https://wa.me/79601701988" target="_blank" class="contact-btn whatsapp-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893-.001-3.189-1.262-6.209-3.553-8.503"/>
+              </svg>
+              WhatsApp
+            </a>
+            <a href="https://t.me/Goldenium" target="_blank" class="contact-btn telegram-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.14.14-.26.26-.534.26l.213-3.053 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.136-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
+              </svg>
+              Telegram @Goldenium
+            </a>
+          </div>
+          
           <div style="display:flex;gap:12px;align-items:center;margin-top:20px">
-            <button type="submit" class="btn btn-lg">📞 Получить консультацию</button>
             <div id="formStatus" class="small"></div>
           </div>
           <div class="small" style="margin-top:12px;color:var(--accent)">
-            ⏱️ Свяжемся в течение 15 минут для анализа задач
+            ⏱️ Мы свяжемся с вами в течение 15 минут для анализа ваших задач!
           </div>
         </form>
       </div>
@@ -233,15 +254,15 @@
     <div>
       <div class="card mock-phone fade">
         <div style="display:flex;justify-content:space-between;align-items:center;color:var(--text-secondary);margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border)">
-          <div style="font-weight:600">Корпоративный AI-ассистент</div>
+          <div style="font-weight:600" id="chatTitle">Corporate AI Assistant</div>
           <div class="small" style="color:var(--success)">Online</div>
         </div>
         <div class="chat">
-          <div class="bubble bot">👋 Добро пожаловать! Я ваш AI-помощник для автоматизации бизнес-процессов. Чем могу помочь?</div>
-          <div class="bubble client">Нужно автоматизировать запись клиентов</div>
-          <div class="bubble bot">Понимаю. Настроим систему бронирования с интеграцией в ваш календарь и CRM</div>
-          <div class="bubble client">И обработку входящих заявок</div>
-          <div class="bubble bot">✅ Готово! Система будет автоматически обрабатывать заявки 24/7 и передавать в отдел продаж</div>
+          <div class="bubble bot" id="message1">👋 Welcome! I'm your AI assistant for business process automation. How can I help?</div>
+          <div class="bubble client" id="message2">Need to automate customer bookings</div>
+          <div class="bubble bot" id="message3">Understood. We'll set up a booking system with integration to your calendar and CRM</div>
+          <div class="bubble client" id="message4">And processing of incoming requests</div>
+          <div class="bubble bot" id="message5">✅ Done! The system will automatically process requests 24/7 and forward them to sales department</div>
         </div>
       </div>
     </div>
@@ -250,50 +271,50 @@
   <!-- All Benefits Section -->
   <section class="section">
     <div class="section-title">
-      <h2>Комплексные бизнес-решения</h2>
-      <p>Автоматизация ключевых процессов предприятия с помощью искусственного интеллекта</p>
+      <h2 id="benefitsTitle">Comprehensive Business Solutions</h2>
+      <p id="benefitsSubtitle">Automation of key enterprise processes using artificial intelligence</p>
     </div>
     
     <div class="benefits">
       <div class="benefit">
         <div class="benefit-icon">🤖</div>
-        <h3>Интеллектуальные боты</h3>
-        <p class="small">AI-решения для обработки заявок, консультаций и автоматизации коммуникаций с клиентами</p>
+        <h3 id="benefit1">Intelligent Bots</h3>
+        <p class="small" id="benefitDesc1">AI solutions for request processing, consultations and communication automation with clients</p>
       </div>
       <div class="benefit">
         <div class="benefit-icon">🎤</div>
-        <h3>Голосовые решения</h3>
-        <p class="small">Автоматические звонки, напоминания, сбор обратной связи и проведение опросов</p>
+        <h3 id="benefit2">Voice Solutions</h3>
+        <p class="small" id="benefitDesc2">Automatic calls, reminders, feedback collection and surveys</p>
       </div>
       <div class="benefit">
         <div class="benefit-icon">🔄</div>
-        <h3>Интеграции</h3>
-        <p class="small">Подключение к CRM, ERP и другим корпоративным системам через Make.com и API</p>
+        <h3 id="benefit3">Integrations</h3>
+        <p class="small" id="benefitDesc3">Connection to CRM, ERP and other corporate systems via Make.com and API</p>
       </div>
       <div class="benefit">
         <div class="benefit-icon">📊</div>
-        <h3>Аналитика и отчетность</h3>
-        <p class="small">Мониторинг эффективности, автоматические отчеты и аналитика в реальном времени</p>
+        <h3 id="benefit4">Analytics & Reporting</h3>
+        <p class="small" id="benefitDesc4">Performance monitoring, automatic reports and real-time analytics</p>
       </div>
       <div class="benefit">
         <div class="benefit-icon">💰</div>
-        <h3>Оптимизация расходов</h3>
-        <p class="small">Снижение затрат на персонал за счет автоматизации рутинных операций</p>
+        <h3 id="benefit5">Cost Optimization</h3>
+        <p class="small" id="benefitDesc5">Reduction of personnel costs through automation of routine operations</p>
       </div>
       <div class="benefit">
         <div class="benefit-icon">⚡</div>
-        <h3>Круглосуточная работа</h3>
-        <p class="small">Непрерывная обработка запросов без перерывов и выходных</p>
+        <h3 id="benefit6">24/7 Operation</h3>
+        <p class="small" id="benefitDesc6">Continuous request processing without breaks or weekends</p>
       </div>
       <div class="benefit">
         <div class="benefit-icon">🎯</div>
-        <h3>Точность данных</h3>
-        <p class="small">Минимизация человеческих ошибок и повышение качества обработки информации</p>
+        <h3 id="benefit7">Data Accuracy</h3>
+        <p class="small" id="benefitDesc7">Minimization of human errors and improvement of information processing quality</p>
       </div>
       <div class="benefit">
         <div class="benefit-icon">🚀</div>
-        <h3>Масштабируемость</h3>
-        <p class="small">Легкая адаптация под рост компании и изменение бизнес-процессов</p>
+        <h3 id="benefit8">Scalability</h3>
+        <p class="small" id="benefitDesc8">Easy adaptation to company growth and changing business processes</p>
       </div>
     </div>
   </section>
@@ -301,26 +322,26 @@
   <!-- Business Benefits -->
   <section class="section">
     <div class="section-title">
-      <h2>Бизнес-преимущества</h2>
-      <p>Измеримые результаты и конкретные выгоды для вашего предприятия</p>
+      <h2 id="businessBenefitsTitle">Business Advantages</h2>
+      <p id="businessBenefitsSubtitle">Measurable results and specific benefits for your enterprise</p>
     </div>
     
     <div class="features">
       <div class="feature">
-        <strong>⏱ Оптимизация времени</strong>
-        <div class="small">Сокращение времени обработки запросов в 5-10 раз за счет автоматизации рутинных операций</div>
+        <strong id="feature1">⏱ Time Optimization</strong>
+        <div class="small" id="featureDesc1">Reduction of request processing time by 5-10 times through automation of routine operations</div>
       </div>
       <div class="feature">
-        <strong>💰 Снижение затрат</strong>
-        <div class="small">Экономия на фонде оплаты труда 1-3 сотрудников при сохранении качества обслуживания</div>
+        <strong id="feature2">💰 Cost Reduction</strong>
+        <div class="small" id="featureDesc2">Savings on payroll of 1-3 employees while maintaining service quality</div>
       </div>
       <div class="feature">
-        <strong>📊 Прозрачность процессов</strong>
-        <div class="small">Полный контроль и аналитика всех бизнес-процессов в реальном времени</div>
+        <strong id="feature3">📊 Process Transparency</strong>
+        <div class="small" id="featureDesc3">Complete control and analytics of all business processes in real time</div>
       </div>
       <div class="feature">
-        <strong>🚀 Рост эффективности</strong>
-        <div class="small">Увеличение количества обработанных заявок и повышение конверсии в продажи</div>
+        <strong id="feature4">🚀 Efficiency Growth</strong>
+        <div class="small" id="featureDesc4">Increase in processed requests and improvement of conversion to sales</div>
       </div>
     </div>
   </section>
@@ -328,50 +349,50 @@
   <!-- Industries -->
   <section class="section">
     <div class="section-title">
-      <h2>Отраслевые решения</h2>
-      <p>Специализированные AI-решения для различных секторов экономики</p>
+      <h2 id="industriesTitle">Industry Solutions</h2>
+      <p id="industriesSubtitle">Specialized AI solutions for various economic sectors</p>
     </div>
     
     <div class="industries">
       <div class="industry">
         <div style="font-size:28px;margin-bottom:12px">🏭</div>
-        <strong>Промышленность</strong>
-        <div class="small">Автоматизация производственных процессов и логистики</div>
+        <strong id="industry1">Industry</strong>
+        <div class="small" id="industryDesc1">Automation of production processes and logistics</div>
       </div>
       <div class="industry">
         <div style="font-size:28px;margin-bottom:12px">🚚</div>
-        <strong>Логистика</strong>
-        <div class="small">Управление цепочками поставок и транспортными операциями</div>
+        <strong id="industry2">Logistics</strong>
+        <div class="small" id="industryDesc2">Supply chain management and transport operations</div>
       </div>
       <div class="industry">
         <div style="font-size:28px;margin-bottom:12px">🛍️</div>
-        <strong>Ритейл</strong>
-        <div class="small">Автоматизация продаж, обслуживания и управления запасами</div>
+        <strong id="industry3">Retail</strong>
+        <div class="small" id="industryDesc3">Automation of sales, service and inventory management</div>
       </div>
       <div class="industry">
         <div style="font-size:28px;margin-bottom:12px">🏗️</div>
-        <strong>Строительство</strong>
-        <div class="small">Управление проектами и автоматизация документооборота</div>
+        <strong id="industry4">Construction</strong>
+        <div class="small" id="industryDesc4">Project management and document flow automation</div>
       </div>
       <div class="industry">
         <div style="font-size:28px;margin-bottom:12px">🏥</div>
-        <strong>Здравоохранение</strong>
-        <div class="small">Запись пациентов, напоминания и управление медицинскими данными</div>
+        <strong id="industry5">Healthcare</strong>
+        <div class="small" id="industryDesc5">Patient appointments, reminders and medical data management</div>
       </div>
       <div class="industry">
         <div style="font-size:28px;margin-bottom:12px">🎓</div>
-        <strong>Образование</strong>
-        <div class="small">Автоматизация приема заявок и управления образовательным процессом</div>
+        <strong id="industry6">Education</strong>
+        <div class="small" id="industryDesc6">Automation of application intake and educational process management</div>
       </div>
       <div class="industry">
         <div style="font-size:28px;margin-bottom:12px">💼</div>
-        <strong>Услуги</strong>
-        <div class="small">B2B и B2C сервисы, консалтинг и профессиональные услуги</div>
+        <strong id="industry7">Services</strong>
+        <div class="small" id="industryDesc7">B2B and B2C services, consulting and professional services</div>
       </div>
       <div class="industry">
         <div style="font-size:28px;margin-bottom:12px">💅</div>
-        <strong>Бьюти-индустрия</strong>
-        <div class="small">Запись клиентов, управление расписанием и программами лояльности</div>
+        <strong id="industry8">Beauty Industry</strong>
+        <div class="small" id="industryDesc8">Client bookings, schedule management and loyalty programs</div>
       </div>
     </div>
   </section>
@@ -379,30 +400,30 @@
   <!-- How It Works -->
   <section class="section">
     <div class="section-title">
-      <h2>Процесс внедрения</h2>
-      <p>Четкий и прозрачный процесс интеграции AI-решений в ваш бизнес</p>
+      <h2 id="processTitle">Implementation Process</h2>
+      <p id="processSubtitle">Clear and transparent process of integrating AI solutions into your business</p>
     </div>
     
     <div class="process">
       <div class="process-step">
         <div class="step-number">1</div>
-        <h3>Анализ</h3>
-        <p class="small">Глубокий анализ бизнес-процессов и определение точек автоматизации</p>
+        <h3 id="step1">Analysis</h3>
+        <p class="small" id="stepDesc1">Deep analysis of business processes and identification of automation points</p>
       </div>
       <div class="process-step">
         <div class="step-number">2</div>
-        <h3>Проектирование</h3>
-        <p class="small">Разработка технического решения и согласование архитектуры системы</p>
+        <h3 id="step2">Design</h3>
+        <p class="small" id="stepDesc2">Development of technical solution and approval of system architecture</p>
       </div>
       <div class="process-step">
         <div class="step-number">3</div>
-        <h3>Внедрение</h3>
-        <p class="small">Настройка и запуск AI-решений с интеграцией в существующие процессы</p>
+        <h3 id="step3">Implementation</h3>
+        <p class="small" id="stepDesc3">Setup and launch of AI solutions with integration into existing processes</p>
       </div>
       <div class="process-step">
         <div class="step-number">4</div>
-        <h3>Поддержка</h3>
-        <p class="small">Обучение команды и техническое сопровождение работы системы</p>
+        <h3 id="step4">Support</h3>
+        <p class="small" id="stepDesc4">Team training and technical support of system operation</p>
       </div>
     </div>
   </section>
@@ -410,20 +431,20 @@
   <!-- Guarantees -->
   <section class="section">
     <div class="card text-center">
-      <h2>Корпоративные гарантии</h2>
-      <p class="lead mb-20">Официальная работа с полным пакетом документов и профессиональной поддержкой</p>
+      <h2 id="guaranteesTitle">Corporate Guarantees</h2>
+      <p class="lead mb-20" id="guaranteesSubtitle">Official work with full package of documents and professional support</p>
       <div class="features" style="grid-template-columns:repeat(3,1fr);gap:20px">
         <div class="feature">
-          <strong>📄 Договорные отношения</strong>
-          <div class="small">Официальный договор оказания услуг со всеми гарантиями</div>
+          <strong id="guarantee1">📄 Contractual Relations</strong>
+          <div class="small" id="guaranteeDesc1">Official service agreement with all guarantees</div>
         </div>
         <div class="feature">
-          <strong>🛡️ Техническая поддержка</strong>
-          <div class="small">Круглосуточная поддержка и оперативное решение вопросов</div>
+          <strong id="guarantee2">🛡️ Technical Support</strong>
+          <div class="small" id="guaranteeDesc2">24/7 support and prompt issue resolution</div>
         </div>
         <div class="feature">
-          <strong>📚 Документация</strong>
-          <div class="small">Полная техническая и пользовательская документация</div>
+          <strong id="guarantee3">📚 Documentation</strong>
+          <div class="small" id="guaranteeDesc3">Complete technical and user documentation</div>
         </div>
       </div>
     </div>
@@ -432,46 +453,46 @@
   <!-- Testimonials -->
   <section class="section">
     <div class="section-title">
-      <h2>Отзывы клиентов</h2>
-      <p>Реальные результаты предприятий после внедрения наших решений</p>
+      <h2 id="testimonialsTitle">Client Reviews</h2>
+      <p id="testimonialsSubtitle">Real results of enterprises after implementing our solutions</p>
     </div>
     
     <div class="testimonials">
       <div class="testimonial">
-        <div class="testimonial-text">
-          "Внедрили AI-систему в производственный цех. Автоматизировали учет заказов и коммуникацию с клиентами. Экономия времени менеджеров составила 60%."
+        <div class="testimonial-text" id="testimonial1">
+          "Implemented AI system in production workshop. Automated order accounting and communication with clients. Manager time savings reached 60%."
         </div>
         <div class="testimonial-author">
-          <div class="author-avatar">М</div>
+          <div class="author-avatar">M</div>
           <div>
-            <strong>Михаил Волков</strong>
-            <div class="small">Директор по развитию, Производственная компания</div>
+            <strong id="author1">Mikhail Volkov</strong>
+            <div class="small" id="authorRole1">Development Director, Manufacturing Company</div>
           </div>
         </div>
       </div>
       
       <div class="testimonial">
-        <div class="testimonial-text">
-          "Бот заменил двух операторов колл-центра. Система автоматически обрабатывает 80% входящих запросов, что позволило перераспределить ресурсы на стратегические задачи."
+        <div class="testimonial-text" id="testimonial2">
+          "Bot replaced two call center operators. The system automatically processes 80% of incoming requests, allowing redistribution of resources to strategic tasks."
         </div>
         <div class="testimonial-author">
-          <div class="author-avatar">А</div>
+          <div class="author-avatar">A</div>
           <div>
-            <strong>Анна Смирнова</strong>
-            <div class="small">Руководитель отдела продаж, Логистическая компания</div>
+            <strong id="author2">Anna Smirnova</strong>
+            <div class="small" id="authorRole2">Sales Department Head, Logistics Company</div>
           </div>
         </div>
       </div>
       
       <div class="testimonial">
-        <div class="testimonial-text">
-          "Запустили за 2 дня! Клиенты отмечают скорость ответов, а сотрудники освободились от рутины. Прозрачность процессов выросла в разы."
+        <div class="testimonial-text" id="testimonial3">
+          "Launched in 2 days! Clients note response speed, and employees freed from routine. Process transparency increased significantly."
         </div>
         <div class="testimonial-author">
-          <div class="author-avatar">Д</div>
+          <div class="author-avatar">D</div>
           <div>
-            <strong>Дмитрий Иванов</strong>
-            <div class="small">Владелец сети, Розничная торговля</div>
+            <strong id="author3">Dmitry Ivanov</strong>
+            <div class="small" id="authorRole3">Network Owner, Retail Trade</div>
           </div>
         </div>
       </div>
@@ -481,48 +502,48 @@
   <!-- FAQ -->
   <section class="section">
     <div class="section-title">
-      <h2>Вопросы и ответы</h2>
-      <p>Часто задаваемые вопросы о внедрении AI-решений</p>
+      <h2 id="faqTitle">Questions & Answers</h2>
+      <p id="faqSubtitle">Frequently asked questions about AI solution implementation</p>
     </div>
     
     <div class="faq">
       <div class="faq-item">
         <div class="faq-question">
-          Какова стоимость внедрения AI-решений?
+          <span id="faqQuestion1">What is the cost of implementing AI solutions?</span>
           <span>+</span>
         </div>
         <div class="faq-answer">
-          Стоимость зависит от сложности задач и масштаба автоматизации. Базовые решения начинаются от 25 000₽. После анализа ваших бизнес-процессов подготовим детальный расчет.
+          <span id="faqAnswer1">Cost depends on task complexity and automation scale. Basic solutions start from 25,000₽. After analyzing your business processes, we'll prepare detailed calculation.</span>
         </div>
       </div>
       
       <div class="faq-item">
         <div class="faq-question">
-          Сколько времени занимает внедрение?
+          <span id="faqQuestion2">How long does implementation take?</span>
           <span>+</span>
         </div>
         <div class="faq-answer">
-          Большинство решений мы внедряем за 1-3 рабочих дня. Сложные интеграции с корпоративными системами могут занять до 5-7 дней.
+          <span id="faqAnswer2">Most solutions we implement within 1-3 business days. Complex integrations with corporate systems may take up to 5-7 days.</span>
         </div>
       </div>
       
       <div class="faq-item">
         <div class="faq-question">
-          Требуются ли технические знания для работы с системой?
+          <span id="faqQuestion3">Are technical knowledge required to work with the system?</span>
           <span>+</span>
         </div>
         <div class="faq-answer">
-          Нет, мы настраиваем все под ключ и проводим обучение ваших сотрудников. Интерфейсы управления интуитивно понятны и не требуют специальных знаний.
+          <span id="faqAnswer3">No, we set up everything turnkey and train your employees. Management interfaces are intuitive and don't require special knowledge.</span>
         </div>
       </div>
       
       <div class="faq-item">
         <div class="faq-question">
-          Какая техническая поддержка предоставляется?
+          <span id="faqQuestion4">What technical support is provided?</span>
           <span>+</span>
         </div>
         <div class="faq-answer">
-          Включаем 30 дней бесплатной поддержки после внедрения. Далее доступны различные пакеты техподдержки, включая круглосуточное сопровождение для корпоративных клиентов.
+          <span id="faqAnswer4">We include 30 days of free support after implementation. Then various support packages are available, including 24/7 accompaniment for corporate clients.</span>
         </div>
       </div>
     </div>
@@ -531,63 +552,83 @@
   <!-- Final CTA -->
   <section class="section text-center">
     <div class="card">
-      <h2>Готовы к автоматизации бизнеса?</h2>
-      <p class="lead mb-20">Оставьте заявку для получения бесплатной консультации и расчета стоимости внедрения</p>
-      <button class="btn btn-lg" onclick="document.getElementById('leadForm').scrollIntoView({behavior: 'smooth'})">
-        📊 Получить расчет
-      </button>
+      <h2 id="ctaTitle">Ready for Business Automation?</h2>
+      <p class="lead mb-20" id="ctaSubtitle">Submit request for free consultation and implementation cost calculation</p>
+      <div class="contact-buttons" style="justify-content:center">
+        <a href="https://wa.me/79601701988" target="_blank" class="contact-btn whatsapp-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893-.001-3.189-1.262-6.209-3.553-8.503"/>
+          </svg>
+          WhatsApp
+        </a>
+        <a href="https://t.me/Goldenium" target="_blank" class="contact-btn telegram-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.14.14-.26.26-.534.26l.213-3.053 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.136-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
+          </svg>
+          Telegram @Goldenium
+        </a>
+      </div>
     </div>
   </section>
 
   <footer>
     <div class="footer-links">
       <a href="https://t.me/Goldenium" target="_blank">Telegram</a>
-      <a href="#" onclick="document.getElementById('settingsBtn').click()">Настройки</a>
-      <a href="#faq">Вопросы</a>
+      <a href="#" onclick="document.getElementById('settingsBtn').click()" id="settingsLink">Settings</a>
+      <a href="#faq" id="faqLink">Questions</a>
     </div>
     <div class="small">
-      © 2025 Goldenium AI Solutions — интеллектуальные бизнес-решения<br>
-      Контакты: <a href="https://t.me/Goldenium" style="color:var(--accent);text-decoration:none">@Goldenium</a>
+      <span id="copyright">© 2025 Goldenium AI Solutions — intelligent business solutions</span><br>
+      <span id="contacts">Contacts:</span> 
+      <a href="https://wa.me/79601701988" style="color:var(--accent);text-decoration:none">WhatsApp</a> • 
+      <a href="https://t.me/Goldenium" style="color:var(--accent);text-decoration:none">Telegram @Goldenium</a>
     </div>
   </footer>
 </div>
 
 <!-- Floating CTA -->
-<a class="floating" href="https://t.me/Goldenium" target="_blank">
+<a class="floating whatsapp-btn" href="https://wa.me/79601701988" target="_blank" style="background:#25D366;right:24px;bottom:24px">
   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.14.14-.26.26-.534.26l.213-3.053 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.136-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893-.001-3.189-1.262-6.209-3.553-8.503"/>
   </svg>
-  Написать в Telegram
+  WhatsApp
+</a>
+
+<a class="floating telegram-btn" href="https://t.me/Goldenium" target="_blank" style="background:#0088cc;right:24px;bottom:90px">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.14.14-.26.26-.534.26l.213-3.053 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.136-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
+  </svg>
+  Telegram
 </a>
 
 <!-- Settings Modal -->
 <div id="settingsModal" style="display:none;position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;padding:28px;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.15);z-index:9999;max-width:500px;width:90%;border:1px solid var(--border)">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
-    <strong style="color:var(--text-primary);font-size:18px">Настройки интеграции</strong>
+    <strong style="color:var(--text-primary);font-size:18px" id="settingsTitle">Integration Settings</strong>
     <button id="closeSettings" style="background:transparent;border:0;color:var(--text-secondary);cursor:pointer;font-size:20px">✕</button>
   </div>
   <div style="margin-top:16px">
-    <label class="small" style="font-weight:500">BOT TOKEN (из @BotFather)</label>
+    <label class="small" style="font-weight:500" id="botTokenLabel">BOT TOKEN (from @BotFather)</label>
     <input id="botToken" placeholder="123456:ABC-DEF..." style="width:100%;margin-top:8px;padding:12px;border:1px solid var(--border);border-radius:10px;background:#fff;font-size:14px" />
   </div>
   <div style="margin-top:16px">
-    <label class="small" style="font-weight:500">CHAT ID (для уведомлений)</label>
+    <label class="small" style="font-weight:500" id="chatIdLabel">CHAT ID (for notifications)</label>
     <input id="chatId" placeholder="123456789" style="width:100%;margin-top:8px;padding:12px;border:1px solid var(--border);border-radius:10px;background:#fff;font-size:14px" />
   </div>
   <div style="margin-top:16px">
-    <label class="small" style="font-weight:500">Режим отправки заявок</label>
+    <label class="small" style="font-weight:500" id="sendModeLabel">Request sending mode</label>
     <select id="sendMode" style="width:100%;margin-top:8px;padding:12px;border:1px solid var(--border);border-radius:10px;background:#fff;font-size:14px">
-      <option value="api">Через Bot API (рекомендуется)</option>
-      <option value="deep">Открывать Telegram</option>
+      <option value="api">Via Bot API (recommended)</option>
+      <option value="deep">Open Telegram</option>
     </select>
   </div>
   <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
-    <button id="saveSettings" class="btn">Сохранить настройки</button>
-    <button id="testSettings" style="background:var(--card);color:var(--text-primary);padding:12px 18px;border-radius:10px;border:1px solid var(--border);cursor:pointer;font-weight:500">Проверить</button>
-    <button id="clearSettings" style="background:var(--card);color:var(--text-primary);padding:12px 18px;border-radius:10px;border:1px solid var(--border);cursor:pointer;font-weight:500">Очистить</button>
+    <button id="saveSettings" class="btn" id="saveSettingsText">Save Settings</button>
+    <button id="testSettings" style="background:var(--card);color:var(--text-primary);padding:12px 18px;border-radius:10px;border:1px solid var(--border);cursor:pointer;font-weight:500" id="testSettingsText">Test</button>
+    <button id="clearSettings" style="background:var(--card);color:var(--text-primary);padding:12px 18px;border-radius:10px;border:1px solid var(--border);cursor:pointer;font-weight:500" id="clearSettingsText">Clear</button>
   </div>
   <div style="margin-top:16px;color:var(--text-secondary);font-size:13px;line-height:1.5">
-    ⚠ Для тестирования: создайте бота через @BotFather и укажите токен + chat_id для получения уведомлений
+    ⚠ For testing: create a bot via @BotFather and specify token + chat_id to receive notifications
   </div>
 </div>
 
@@ -608,11 +649,123 @@
       settingsCleared: "Настройки очищены",
       confirmClear: "Точно очистить настройки?",
       testSuccess: "Настройки работают!",
-      testError: "Ошибка: проверьте токен и chat_id"
+      testError: "Ошибка: проверьте токен и chat_id",
+      companyName: "Goldenium AI Solutions",
+      companyTagline: "Корпоративная автоматизация · AI-боты · Бизнес-процессы",
+      implementationBadge: "🚀 ВНЕДРЕНИЕ ЗА 24 ЧАСА",
+      stat1: "Операционные расходы",
+      stat2: "Автоматизация процессов",
+      stat3: "Срок внедрения",
+      stat4: "FTE экономия",
+      chatTitle: "Корпоративный AI-ассистент",
+      message1: "👋 Добро пожаловать! Я ваш AI-помощник для автоматизации бизнес-процессов. Чем могу помочь?",
+      message2: "Нужно автоматизировать запись клиентов",
+      message3: "Понимаю. Настроим систему бронирования с интеграцией в ваш календарь и CRM",
+      message4: "И обработку входящих заявок",
+      message5: "✅ Готово! Система будет автоматически обрабатывать заявки 24/7 и передавать в отдел продаж",
+      benefitsTitle: "Комплексные бизнес-решения",
+      benefitsSubtitle: "Автоматизация ключевых процессов предприятия с помощью искусственного интеллекта",
+      benefit1: "Интеллектуальные боты",
+      benefitDesc1: "AI-решения для обработки заявок, консультаций и автоматизации коммуникаций с клиентами",
+      benefit2: "Голосовые решения",
+      benefitDesc2: "Автоматические звонки, напоминания, сбор обратной связи и проведение опросов",
+      benefit3: "Интеграции",
+      benefitDesc3: "Подключение к CRM, ERP и другим корпоративным системам через Make.com и API",
+      benefit4: "Аналитика и отчетность",
+      benefitDesc4: "Мониторинг эффективности, автоматические отчеты и аналитика в реальном времени",
+      benefit5: "Оптимизация расходов",
+      benefitDesc5: "Снижение затрат на персонал за счет автоматизации рутинных операций",
+      benefit6: "Круглосуточная работа",
+      benefitDesc6: "Непрерывная обработка запросов без перерывов и выходных",
+      benefit7: "Точность данных",
+      benefitDesc7: "Минимизация человеческих ошибок и повышение качества обработки информации",
+      benefit8: "Масштабируемость",
+      benefitDesc8: "Легкая адаптация под рост компании и изменение бизнес-процессов",
+      businessBenefitsTitle: "Бизнес-преимущества",
+      businessBenefitsSubtitle: "Измеримые результаты и конкретные выгоды для вашего предприятия",
+      feature1: "⏱ Оптимизация времени",
+      featureDesc1: "Сокращение времени обработки запросов в 5-10 раз за счет автоматизации рутинных операций",
+      feature2: "💰 Снижение затрат",
+      featureDesc2: "Экономия на фонде оплаты труда 1-3 сотрудников при сохранении качества обслуживания",
+      feature3: "📊 Прозрачность процессов",
+      featureDesc3: "Полный контроль и аналитика всех бизнес-процессов в реальном времени",
+      feature4: "🚀 Рост эффективности",
+      featureDesc4: "Увеличение количества обработанных заявок и повышение конверсии в продажи",
+      industriesTitle: "Отраслевые решения",
+      industriesSubtitle: "Специализированные AI-решения для различных секторов экономики",
+      industry1: "Промышленность",
+      industryDesc1: "Автоматизация производственных процессов и логистики",
+      industry2: "Логистика",
+      industryDesc2: "Управление цепочками поставок и транспортными операциями",
+      industry3: "Ритейл",
+      industryDesc3: "Автоматизация продаж, обслуживания и управления запасами",
+      industry4: "Строительство",
+      industryDesc4: "Управление проектами и автоматизация документооборота",
+      industry5: "Здравоохранение",
+      industryDesc5: "Запись пациентов, напоминания и управление медицинскими данными",
+      industry6: "Образование",
+      industryDesc6: "Автоматизация приема заявок и управления образовательным процессом",
+      industry7: "Услуги",
+      industryDesc7: "B2B и B2C сервисы, консалтинг и профессиональные услуги",
+      industry8: "Бьюти-индустрия",
+      industryDesc8: "Запись клиентов, управление расписанием и программами лояльности",
+      processTitle: "Процесс внедрения",
+      processSubtitle: "Четкий и прозрачный процесс интеграции AI-решений в ваш бизнес",
+      step1: "Анализ",
+      stepDesc1: "Глубокий анализ бизнес-процессов и определение точек автоматизации",
+      step2: "Проектирование",
+      stepDesc2: "Разработка технического решения и согласование архитектуры системы",
+      step3: "Внедрение",
+      stepDesc3: "Настройка и запуск AI-решений с интеграцией в существующие процессы",
+      step4: "Поддержка",
+      stepDesc4: "Обучение команды и техническое сопровождение работы системы",
+      guaranteesTitle: "Корпоративные гарантии",
+      guaranteesSubtitle: "Официальная работа с полным пакетом документов и профессиональной поддержкой",
+      guarantee1: "📄 Договорные отношения",
+      guaranteeDesc1: "Официальный договор оказания услуг со всеми гарантиями",
+      guarantee2: "🛡️ Техническая поддержка",
+      guaranteeDesc2: "Круглосуточная поддержка и оперативное решение вопросов",
+      guarantee3: "📚 Документация",
+      guaranteeDesc3: "Полная техническая и пользовательская документация",
+      testimonialsTitle: "Отзывы клиентов",
+      testimonialsSubtitle: "Реальные результаты предприятий после внедрения наших решений",
+      testimonial1: "\"Внедрили AI-систему в производственный цех. Автоматизировали учет заказов и коммуникацию с клиентами. Экономия времени менеджеров составила 60%.\"",
+      author1: "Михаил Волков",
+      authorRole1: "Директор по развитию, Производственная компания",
+      testimonial2: "\"Бот заменил двух операторов колл-центра. Система автоматически обрабатывает 80% входящих запросов, что позволило перераспределить ресурсы на стратегические задачи.\"",
+      author2: "Анна Смирнова",
+      authorRole2: "Руководитель отдела продаж, Логистическая компания",
+      testimonial3: "\"Запустили за 2 дня! Клиенты отмечают скорость ответов, а сотрудники освободились от рутины. Прозрачность процессов выросла в разы.\"",
+      author3: "Дмитрий Иванов",
+      authorRole3: "Владелец сети, Розничная торговля",
+      faqTitle: "Вопросы и ответы",
+      faqSubtitle: "Часто задаваемые вопросы о внедрении AI-решений",
+      faqQuestion1: "Какова стоимость внедрения AI-решений?",
+      faqAnswer1: "Стоимость зависит от сложности задач и масштаба автоматизации. Базовые решения начинаются от 5 000₽. После анализа ваших бизнес-процессов подготовим детальный расчет.",
+      faqQuestion2: "Сколько времени занимает внедрение?",
+      faqAnswer2: "Большинство решений мы внедряем за 1-3 рабочих дня. Сложные интеграции с корпоративными системами могут занять до 5-7 дней.",
+      faqQuestion3: "Требуются ли технические знания для работы с системой?",
+      faqAnswer3: "Нет, мы настраиваем все под ключ и проводим обучение ваших сотрудников. Интерфейсы управления интуитивно понятны и не требуют специальных знаний.",
+      faqQuestion4: "Какая техническая поддержка предоставляется?",
+      faqAnswer4: "Включаем 30 дней бесплатной поддержки после внедрения. Далее доступны различные пакеты техподдержки, включая круглосуточное сопровождение для корпоративных клиентов.",
+      ctaTitle: "Готовы к автоматизации бизнеса?",
+      ctaSubtitle: "Оставьте заявку для получения бесплатной консультации и расчета стоимости внедрения",
+      settingsLink: "Настройки",
+      faqLink: "Вопросы",
+      copyright: "© 2025 Goldenium AI Solutions — интеллектуальные бизнес-решения",
+      contacts: "Контакты:",
+      floatingText: "Написать в WhatsApp",
+      settingsTitle: "Настройки интеграции",
+      botTokenLabel: "BOT TOKEN (из @BotFather)",
+      chatIdLabel: "CHAT ID (для уведомлений)",
+      sendModeLabel: "Режим отправки заявок",
+      saveSettingsText: "Сохранить настройки",
+      testSettingsText: "Проверить",
+      clearSettingsText: "Очистить"
     },
     en: {
       title: "Corporate Automation with Artificial Intelligence",
-      subtitle: "Implement AI solutions for business process automation. Reduce operational costs by 40% according to our clients' data",
+      subtitle: "We implement AI solutions for business process automation. Reduce operational costs by 40% according to our clients' data",
       namePlaceholder: "Your name",
       phonePlaceholder: "+1 555 000 0000",
       notePlaceholder: "Describe your automation task...",
@@ -624,7 +777,119 @@
       settingsCleared: "Settings cleared",
       confirmClear: "Really clear settings?",
       testSuccess: "Settings work!",
-      testError: "Error: check token and chat_id"
+      testError: "Error: check token and chat_id",
+      companyName: "Goldenium AI Solutions",
+      companyTagline: "Corporate Automation · AI Bots · Business Processes",
+      implementationBadge: "🚀 IMPLEMENTATION IN 24 HOURS",
+      stat1: "Operational costs",
+      stat2: "Process automation",
+      stat3: "Implementation time",
+      stat4: "FTE savings",
+      chatTitle: "Corporate AI Assistant",
+      message1: "👋 Welcome! I'm your AI assistant for business process automation. How can I help?",
+      message2: "Need to automate customer bookings",
+      message3: "Understood. We'll set up a booking system with integration to your calendar and CRM",
+      message4: "And processing of incoming requests",
+      message5: "✅ Done! The system will automatically process requests 24/7 and forward them to sales department",
+      benefitsTitle: "Comprehensive Business Solutions",
+      benefitsSubtitle: "Automation of key enterprise processes using artificial intelligence",
+      benefit1: "Intelligent Bots",
+      benefitDesc1: "AI solutions for request processing, consultations and communication automation with clients",
+      benefit2: "Voice Solutions",
+      benefitDesc2: "Automatic calls, reminders, feedback collection and surveys",
+      benefit3: "Integrations",
+      benefitDesc3: "Connection to CRM, ERP and other corporate systems via Make.com and API",
+      benefit4: "Analytics & Reporting",
+      benefitDesc4: "Performance monitoring, automatic reports and real-time analytics",
+      benefit5: "Cost Optimization",
+      benefitDesc5: "Reduction of personnel costs through automation of routine operations",
+      benefit6: "24/7 Operation",
+      benefitDesc6: "Continuous request processing without breaks or weekends",
+      benefit7: "Data Accuracy",
+      benefitDesc7: "Minimization of human errors and improvement of information processing quality",
+      benefit8: "Scalability",
+      benefitDesc8: "Easy adaptation to company growth and changing business processes",
+      businessBenefitsTitle: "Business Advantages",
+      businessBenefitsSubtitle: "Measurable results and specific benefits for your enterprise",
+      feature1: "⏱ Time Optimization",
+      featureDesc1: "Reduction of request processing time by 5-10 times through automation of routine operations",
+      feature2: "💰 Cost Reduction",
+      featureDesc2: "Savings on payroll of 1-3 employees while maintaining service quality",
+      feature3: "📊 Process Transparency",
+      featureDesc3: "Complete control and analytics of all business processes in real time",
+      feature4: "🚀 Efficiency Growth",
+      featureDesc4: "Increase in processed requests and improvement of conversion to sales",
+      industriesTitle: "Industry Solutions",
+      industriesSubtitle: "Specialized AI solutions for various economic sectors",
+      industry1: "Industry",
+      industryDesc1: "Automation of production processes and logistics",
+      industry2: "Logistics",
+      industryDesc2: "Supply chain management and transport operations",
+      industry3: "Retail",
+      industryDesc3: "Automation of sales, service and inventory management",
+      industry4: "Construction",
+      industryDesc4: "Project management and document flow automation",
+      industry5: "Healthcare",
+      industryDesc5: "Patient appointments, reminders and medical data management",
+      industry6: "Education",
+      industryDesc6: "Automation of application intake and educational process management",
+      industry7: "Services",
+      industryDesc7: "B2B and B2C services, consulting and professional services",
+      industry8: "Beauty Industry",
+      industryDesc8: "Client bookings, schedule management and loyalty programs",
+      processTitle: "Implementation Process",
+      processSubtitle: "Clear and transparent process of integrating AI solutions into your business",
+      step1: "Analysis",
+      stepDesc1: "Deep analysis of business processes and identification of automation points",
+      step2: "Design",
+      stepDesc2: "Development of technical solution and approval of system architecture",
+      step3: "Implementation",
+      stepDesc3: "Setup and launch of AI solutions with integration into existing processes",
+      step4: "Support",
+      stepDesc4: "Team training and technical support of system operation",
+      guaranteesTitle: "Corporate Guarantees",
+      guaranteesSubtitle: "Official work with full package of documents and professional support",
+      guarantee1: "📄 Contractual Relations",
+      guaranteeDesc1: "Official service agreement with all guarantees",
+      guarantee2: "🛡️ Technical Support",
+      guaranteeDesc2: "24/7 support and prompt issue resolution",
+      guarantee3: "📚 Documentation",
+      guaranteeDesc3: "Complete technical and user documentation",
+      testimonialsTitle: "Client Reviews",
+      testimonialsSubtitle: "Real results of enterprises after implementing our solutions",
+      testimonial1: "\"Implemented AI system in production workshop. Automated order accounting and communication with clients. Manager time savings reached 60%.\"",
+      author1: "Mikhail Volkov",
+      authorRole1: "Development Director, Manufacturing Company",
+      testimonial2: "\"Bot replaced two call center operators. The system automatically processes 80% of incoming requests, allowing redistribution of resources to strategic tasks.\"",
+      author2: "Anna Smirnova",
+      authorRole2: "Sales Department Head, Logistics Company",
+      testimonial3: "\"Launched in 2 days! Clients note response speed, and employees freed from routine. Process transparency increased significantly.\"",
+      author3: "Dmitry Ivanov",
+      authorRole3: "Network Owner, Retail Trade",
+      faqTitle: "Questions & Answers",
+      faqSubtitle: "Frequently asked questions about AI solution implementation",
+      faqQuestion1: "What is the cost of implementing AI solutions?",
+      faqAnswer1: "Cost depends on task complexity and automation scale. Basic solutions start from 5,000₽. After analyzing your business processes, we'll prepare detailed calculation.",
+      faqQuestion2: "How long does implementation take?",
+      faqAnswer2: "Most solutions we implement within 1-3 business days. Complex integrations with corporate systems may take up to 5-7 days.",
+      faqQuestion3: "Are technical knowledge required to work with the system?",
+      faqAnswer3: "No, we set up everything turnkey and train your employees. Management interfaces are intuitive and don't require special knowledge.",
+      faqQuestion4: "What technical support is provided?",
+      faqAnswer4: "We include 30 days of free support after implementation. Then various support packages are available, including 24/7 accompaniment for corporate clients.",
+      ctaTitle: "Ready for Business Automation?",
+      ctaSubtitle: "Submit request for free consultation and implementation cost calculation",
+      settingsLink: "Settings",
+      faqLink: "Questions",
+      copyright: "© 2025 Goldenium AI Solutions — intelligent business solutions",
+      contacts: "Contacts:",
+      floatingText: "Write to WhatsApp",
+      settingsTitle: "Integration Settings",
+      botTokenLabel: "BOT TOKEN (from @BotFather)",
+      chatIdLabel: "CHAT ID (for notifications)",
+      sendModeLabel: "Request sending mode",
+      saveSettingsText: "Save Settings",
+      testSettingsText: "Test",
+      clearSettingsText: "Clear"
     },
     es: {
       title: "Automatización Corporativa con Inteligencia Artificial",
@@ -640,7 +905,119 @@
       settingsCleared: "Configuración eliminada",
       confirmClear: "¿Realmente borrar configuración?",
       testSuccess: "Configuración funciona!",
-      testError: "Error: verifica token y chat_id"
+      testError: "Error: verifica token y chat_id",
+      companyName: "Goldenium AI Solutions",
+      companyTagline: "Automatización Corporativa · Bots AI · Procesos Empresariales",
+      implementationBadge: "🚀 IMPLEMENTACIÓN EN 24 HORAS",
+      stat1: "Costos operativos",
+      stat2: "Automatización de procesos",
+      stat3: "Tiempo de implementación",
+      stat4: "Ahorro FTE",
+      chatTitle: "Asistente IA Corporativo",
+      message1: "👋 ¡Bienvenido! Soy tu asistente IA para automatización de procesos empresariales. ¿Cómo puedo ayudarte?",
+      message2: "Necesito automatizar reservas de clientes",
+      message3: "Entendido. Configuraremos un sistema de reservas con integración a tu calendario y CRM",
+      message4: "Y procesamiento de solicitudes entrantes",
+      message5: "✅ ¡Listo! El sistema procesará automáticamente solicitudes 24/7 y las enviará al departamento de ventas",
+      benefitsTitle: "Soluciones Empresariales Integrales",
+      benefitsSubtitle: "Automatización de procesos empresariales clave usando inteligencia artificial",
+      benefit1: "Bots Inteligentes",
+      benefitDesc1: "Soluciones AI para procesamiento de solicitudes, consultas y automatización de comunicaciones con clientes",
+      benefit2: "Soluciones de Voz",
+      benefitDesc2: "Llamadas automáticas, recordatorios, recolección de comentarios y encuestas",
+      benefit3: "Integraciones",
+      benefitDesc3: "Conexión a CRM, ERP y otros sistemas corporativos vía Make.com y API",
+      benefit4: "Analítica e Informes",
+      benefitDesc4: "Monitoreo de rendimiento, informes automáticos y analítica en tiempo real",
+      benefit5: "Optimización de Costos",
+      benefitDesc5: "Reducción de costos de personal mediante automatización de operaciones rutinarias",
+      benefit6: "Operación 24/7",
+      benefitDesc6: "Procesamiento continuo de solicitudes sin interrupciones ni fines de semana",
+      benefit7: "Precisión de Datos",
+      benefitDesc7: "Minimización de errores humanos y mejora de la calidad del procesamiento de información",
+      benefit8: "Escalabilidad",
+      benefitDesc8: "Fácil adaptación al crecimiento de la empresa y cambios en procesos empresariales",
+      businessBenefitsTitle: "Ventajas Empresariales",
+      businessBenefitsSubtitle: "Resultados medibles y beneficios específicos para tu empresa",
+      feature1: "⏱ Optimización de Tiempo",
+      featureDesc1: "Reducción del tiempo de procesamiento de solicitudes 5-10 veces mediante automatización de operaciones rutinarias",
+      feature2: "💰 Reducción de Costos",
+      featureDesc2: "Ahorro en nómina de 1-3 empleados manteniendo la calidad del servicio",
+      feature3: "📊 Transparencia de Procesos",
+      featureDesc3: "Control completo y analítica de todos los procesos empresariales en tiempo real",
+      feature4: "🚀 Crecimiento de Eficiencia",
+      featureDesc4: "Aumento de solicitudes procesadas y mejora de conversión en ventas",
+      industriesTitle: "Soluciones Industriales",
+      industriesSubtitle: "Soluciones AI especializadas para varios sectores económicos",
+      industry1: "Industria",
+      industryDesc1: "Automatización de procesos productivos y logística",
+      industry2: "Logística",
+      industryDesc2: "Gestión de cadena de suministro y operaciones de transporte",
+      industry3: "Minorista",
+      industryDesc3: "Automatización de ventas, servicio y gestión de inventario",
+      industry4: "Construcción",
+      industryDesc4: "Gestión de proyectos y automatización de flujo de documentos",
+      industry5: "Salud",
+      industryDesc5: "Citas de pacientes, recordatorios y gestión de datos médicos",
+      industry6: "Educación",
+      industryDesc6: "Automatización de admisión de solicitudes y gestión del proceso educativo",
+      industry7: "Servicios",
+      industryDesc7: "Servicios B2B y B2C, consultoría y servicios profesionales",
+      industry8: "Industria de Belleza",
+      industryDesc8: "Reservas de clientes, gestión de horarios y programas de fidelización",
+      processTitle: "Proceso de Implementación",
+      processSubtitle: "Proceso claro y transparente de integración de soluciones AI en tu negocio",
+      step1: "Análisis",
+      stepDesc1: "Análisis profundo de procesos empresariales e identificación de puntos de automatización",
+      step2: "Diseño",
+      stepDesc2: "Desarrollo de solución técnica y aprobación de arquitectura del sistema",
+      step3: "Implementación",
+      stepDesc3: "Configuración y lanzamiento de soluciones AI con integración en procesos existentes",
+      step4: "Soporte",
+      stepDesc4: "Capacitación del equipo y soporte técnico de operación del sistema",
+      guaranteesTitle: "Garantías Corporativas",
+      guaranteesSubtitle: "Trabajo oficial con paquete completo de documentos y soporte profesional",
+      guarantee1: "📄 Relaciones Contractuales",
+      guaranteeDesc1: "Acuerdo de servicio oficial con todas las garantías",
+      guarantee2: "🛡️ Soporte Técnico",
+      guaranteeDesc2: "Soporte 24/7 y resolución rápida de problemas",
+      guarantee3: "📚 Documentación",
+      guaranteeDesc3: "Documentación técnica y de usuario completa",
+      testimonialsTitle: "Opiniones de Clientes",
+      testimonialsSubtitle: "Resultados reales de empresas después de implementar nuestras soluciones",
+      testimonial1: "\"Implementamos sistema AI en taller de producción. Automatizamos contabilidad de pedidos y comunicación con clientes. El ahorro de tiempo de gerentes alcanzó 60%.\"",
+      author1: "Mikhail Volkov",
+      authorRole1: "Director de Desarrollo, Empresa Manufacturera",
+      testimonial2: "\"Bot reemplazó dos operadores de call center. El sistema procesa automáticamente 80% de solicitudes entrantes, permitiendo redistribuir recursos a tareas estratégicas.\"",
+      author2: "Anna Smirnova",
+      authorRole2: "Jefa de Departamento de Ventas, Empresa Logística",
+      testimonial3: "\"¡Lanzado en 2 días! Clientes notan velocidad de respuesta, y empleados se liberaron de rutina. La transparencia de procesos aumentó significativamente.\"",
+      author3: "Dmitry Ivanov",
+      authorRole3: "Dueño de Red, Comercio Minorista",
+      faqTitle: "Preguntas y Respuestas",
+      faqSubtitle: "Preguntas frecuentes sobre implementación de soluciones AI",
+      faqQuestion1: "¿Cuál es el costo de implementar soluciones AI?",
+      faqAnswer1: "El costo depende de la complejidad de las tareas y la escala de automatización. Las soluciones básicas comienzan desde 5,000₽. Después de analizar tus procesos empresariales, prepararemos cálculo detallado.",
+      faqQuestion2: "¿Cuánto tiempo toma la implementación?",
+      faqAnswer2: "La mayoría de soluciones las implementamos en 1-3 días laborables. Integraciones complejas con sistemas corporativos pueden tomar hasta 5-7 días.",
+      faqQuestion3: "¿Se requieren conocimientos técnicos para trabajar con el sistema?",
+      faqAnswer3: "No, configuramos todo listo para usar y capacitamos a tus empleados. Las interfaces de gestión son intuitivas y no requieren conocimientos especiales.",
+      faqQuestion4: "¿Qué soporte técnico se proporciona?",
+      faqAnswer4: "Incluimos 30 días de soporte gratuito después de la implementación. Luego están disponibles varios paquetes de soporte, incluido acompañamiento 24/7 para clientes corporativos.",
+      ctaTitle: "¿Listo para la Automatización Empresarial?",
+      ctaSubtitle: "Envía solicitud para consulta gratuita y cálculo de costo de implementación",
+      settingsLink: "Configuración",
+      faqLink: "Preguntas",
+      copyright: "© 2025 Goldenium AI Solutions — soluciones empresariales inteligentes",
+      contacts: "Contactos:",
+      floatingText: "Escribir a WhatsApp",
+      settingsTitle: "Configuración de Integración",
+      botTokenLabel: "BOT TOKEN (de @BotFather)",
+      chatIdLabel: "CHAT ID (para notificaciones)",
+      sendModeLabel: "Modo de envío de solicitudes",
+      saveSettingsText: "Guardar Configuración",
+      testSettingsText: "Probar",
+      clearSettingsText: "Limpiar"
     }
   };
 
@@ -684,7 +1061,6 @@
   const nameInp = document.getElementById('clientName');
   const phoneInp = document.getElementById('clientPhone');
   const noteInp = document.getElementById('note');
-  const submitBtn = document.querySelector('.btn[type="submit"]');
   const formStatus = document.getElementById('formStatus');
   const settingsBtn = document.getElementById('settingsBtn');
   const settingsModal = document.getElementById('settingsModal');
@@ -697,15 +1073,59 @@
   const sendModeSelect = document.getElementById('sendMode');
 
   // Language handling
-  let lang = 'ru';
+  let lang = 'en';
   function applyLang(l) {
     lang = l;
-    titleEl.textContent = texts[l].title;
-    subtitleEl.textContent = texts[l].subtitle;
-    nameInp.placeholder = texts[l].namePlaceholder;
-    phoneInp.placeholder = texts[l].phonePlaceholder;
-    noteInp.placeholder = texts[l].notePlaceholder;
-    if (submitBtn) submitBtn.innerHTML = texts[l].submit;
+    const t = texts[l];
+    
+    // Update all elements with IDs
+    document.querySelectorAll('[id]').forEach(el => {
+      const id = el.id;
+      if (t[id] !== undefined) {
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.placeholder = t[id];
+        } else {
+          el.textContent = t[id];
+        }
+      }
+    });
+    
+    // Update business type options
+    const businessTypeSelect = document.getElementById('businessType');
+    if (businessTypeSelect && l === 'ru') {
+      businessTypeSelect.innerHTML = `
+        <option value="production">Производство</option>
+        <option value="logistics">Логистика и транспорт</option>
+        <option value="retail">Оптово-розничная торговля</option>
+        <option value="construction">Строительство и аренда</option>
+        <option value="medical">Медицина и лаборатории</option>
+        <option value="education">Образование и консалтинг</option>
+        <option value="services">Услуги и B2B</option>
+        <option value="beauty">Бьюти-индустрия</option>
+      `;
+    } else if (businessTypeSelect && l === 'en') {
+      businessTypeSelect.innerHTML = `
+        <option value="production">Production</option>
+        <option value="logistics">Logistics and transport</option>
+        <option value="retail">Wholesale and retail trade</option>
+        <option value="construction">Construction and rental</option>
+        <option value="medical">Medicine and laboratories</option>
+        <option value="education">Education and consulting</option>
+        <option value="services">Services and B2B</option>
+        <option value="beauty">Beauty industry</option>
+      `;
+    } else if (businessTypeSelect && l === 'es') {
+      businessTypeSelect.innerHTML = `
+        <option value="production">Producción</option>
+        <option value="logistics">Logística y transporte</option>
+        <option value="retail">Comercio mayorista y minorista</option>
+        <option value="construction">Construcción y alquiler</option>
+        <option value="medical">Medicina y laboratorios</option>
+        <option value="education">Educación y consultoría</option>
+        <option value="services">Servicios y B2B</option>
+        <option value="beauty">Industria de belleza</option>
+      `;
+    }
   }
   
   langBtns.forEach(btn => {
@@ -751,78 +1171,15 @@
     const token = botTokenInput.value.trim();
     const chatId = chatIdInput.value.trim();
     if (!token || !chatId) {
-      alert('Заполните токен и chat_id');
+      alert('Fill in token and chat_id');
       return;
     }
     testSettingsBtn.disabled = true;
-    testSettingsBtn.textContent = 'Проверка...';
+    testSettingsBtn.textContent = texts[lang].sending;
     const isValid = await testTelegramSettings(token, chatId);
     testSettingsBtn.disabled = false;
-    testSettingsBtn.textContent = 'Проверить';
+    testSettingsBtn.textContent = texts[lang].testSettingsText;
     alert(isValid ? texts[lang].testSuccess : texts[lang].testError);
-  });
-
-  // Form submission
-  document.getElementById('leadForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    formStatus.textContent = '';
-    
-    const name = nameInp.value.trim();
-    const phone = phoneInp.value.trim();
-    const note = noteInp.value.trim();
-    const type = document.getElementById('businessType').value;
-    const currency = currencySel.value || 'RUB';
-    
-    if (!name || !phone) {
-      formStatus.textContent = 'Заполните имя и телефон';
-      return;
-    }
-    
-    if (!validatePhone(phone)) {
-      formStatus.textContent = 'Введите корректный номер телефона';
-      return;
-    }
-    
-    // Show loading
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = `${texts[lang].sending} <div style="display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-radius:50%;border-top-color:#fff;animation:spin 1s ease-in-out infinite;margin-left:8px"></div>`;
-    submitBtn.disabled = true;
-
-    // Prepare message
-    const langMap = {ru:'Русский', en:'English', es:'Español'};
-    const message = `🎯 Новая корпоративная заявка\nЯзык: ${langMap[lang]}\nОтрасль: ${type}\nКонтакт: ${name}\nТелефон: ${phone}\nЗадача: ${note}\nВалюта: ${currency}`;
-
-    const s = loadSettings();
-    
-    // Try Telegram API if configured
-    if (s.sendMode === 'api' && s.botToken && s.chatId) {
-      const url = `https://api.telegram.org/bot${encodeURIComponent(s.botToken)}/sendMessage`;
-      const payload = { chat_id: s.chatId, text: message };
-      try {
-        const resp = await fetch(url, { 
-          method: 'POST', 
-          headers: {'Content-Type': 'application/json'}, 
-          body: JSON.stringify(payload) 
-        });
-        const data = await resp.json();
-        if (data && data.ok) {
-          formStatus.innerHTML = `<span class="success">${texts[lang].success}</span>`;
-          nameInp.value = ''; phoneInp.value = ''; noteInp.value = '';
-          submitBtn.innerHTML = originalText;
-          submitBtn.disabled = false;
-          return;
-        }
-      } catch (err) {}
-    }
-    
-    // Fallback to Telegram deep link
-    const deepText = encodeURIComponent(`[Goldenium Corporate] ${message}`);
-    const tgLink = `https://t.me/Goldenium?text=${deepText}`;
-    window.open(tgLink, '_blank');
-    formStatus.innerHTML = `<span class="small">${texts[lang].error}</span>`;
-    
-    submitBtn.innerHTML = originalText;
-    submitBtn.disabled = false;
   });
 
   // FAQ toggle
@@ -831,12 +1188,12 @@
       const answer = question.nextElementSibling;
       const isVisible = answer.style.display === 'block';
       answer.style.display = isVisible ? 'none' : 'block';
-      question.querySelector('span').textContent = isVisible ? '+' : '−';
+      question.querySelector('span:last-child').textContent = isVisible ? '+' : '−';
     });
   });
 
   // Initialize
-  applyLang('ru');
+  applyLang('en');
   const s = loadSettings();
   if (s.botToken) botTokenInput.value = s.botToken;
   if (s.chatId) chatIdInput.value = s.chatId;
