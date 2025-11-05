@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AI Боты под ключ — Goldenium 🤖 Автоматизация бизнеса с ИИ</title>
+<meta name="description" content="Внедряем умные AI-боты в ваш бизнес за 1 день. Telegram-боты, голосовые помощники, интеграции. Экономьте до 3 сотрудников!" />
+<meta property="og:title" content="AI Боты под ключ — Goldenium 🤖 Автоматизация бизнеса" />
+<meta property="og:description" content="Telegram-боты с ИИ, голосовые помощники, интеграции. Замена 1-3 сотрудников AI-системами" />
+<meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/616/616408.png" />
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/616/616408.png" />
+<style>
+  :root{
+    --bg:#ffffff;--card:#f8fafc;--muted:#64748b;--accent:#1e40af;--glass:rgba(241,245,249,0.8);
+    --success:#059669;--error:#dc2626;--gradient:linear-gradient(135deg,#1e40af,#3730a3);
+    --border:#e2e8f0;--text-primary:#1e293b;--text-secondary:#475569
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{margin:0;font-family:Inter, system-ui, -apple-system, sans-serif;background:var(--bg);color:var(--text-primary);-webkit-font-smoothing:antialiased;line-height:1.6}
+  .wrap{max-width:1200px;margin:0 auto;padding:28px}
+  
+  /* Header */
+  header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:36px 0;border-bottom:1px solid var(--border)}
+  .brand{display:flex;align-items:center;gap:14px}
+  .logo{width:56px;height:56px;border-radius:12px;background:var(--gradient);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;box-shadow:0 4px 12px rgba(30,64,175,0.15)}
+  h1{margin:0;font-size:20px;color:var(--text-primary);font-weight:600}
+  .langs{display:flex;gap:8px;align-items:center}
+  .langbtn{background:var(--card);border:1px solid var(--border);padding:8px 12px;border-radius:8px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s;font-size:13px;font-weight:500}
+  .langbtn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .settings{position:fixed;right:18px;top:18px;background:var(--card);color:var(--text-secondary);border:1px solid var(--border);padding:10px;border-radius:8px;cursor:pointer;z-index:1000;font-weight:500}
+  
+  /* Hero Section */
+  .hero{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:start;padding:42px 0}
+  .card{background:var(--card);border-radius:16px;padding:32px;box-shadow:0 1px 3px rgba(0,0,0,0.05);border:1px solid var(--border)}
+  h2{color:var(--text-primary);margin:0 0 16px;font-size:32px;font-weight:700;line-height:1.2}
+  .lead{color:var(--text-secondary);margin:0 0 24px;font-size:18px;line-height:1.6}
+  .badge{display:inline-block;background:var(--gradient);color:#fff;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:20px}
+  
+  /* Stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin:32px 0}
+  .stat{text-align:center;padding:20px}
+  .stat-number{font-size:36px;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;line-height:1}
+  .stat-label{font-size:14px;color:var(--text-secondary);font-weight:500}
+  
+  /* CTA Button */
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--gradient);color:#fff;padding:16px 28px;border-radius:12px;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:all 0.3s;font-size:16px;box-shadow:0 2px 8px rgba(30,64,175,0.2)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(30,64,175,0.25)}
+  .btn-lg{font-size:17px;padding:18px 32px}
+  .btn-outline{background:transparent;border:2px solid var(--accent);color:var(--accent);box-shadow:none}
+  .btn-outline:hover{background:var(--accent);color:#fff}
+  
+  /* Form */
+  form .row{display:flex;gap:12px;margin-bottom:12px}
+  input, select, textarea{width:100%;padding:14px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--text-primary);font-family:inherit;font-size:15px;transition:all 0.2s}
+  input:focus, select:focus, textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(30,64,175,0.1)}
+  textarea{min-height:100px;resize:vertical}
+  
+  /* Features */
+  .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:32px}
+  .feature{background:#fff;padding:24px;border-radius:12px;color:var(--text-primary);transition:all 0.3s;border:1px solid var(--border);box-shadow:0 1px 2px rgba(0,0,0,0.03)}
+  .feature:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+  .feature strong{display:block;margin-bottom:12px;color:var(--text-primary);font-size:16px;font-weight:600}
+  
+  /* Demo Phone */
+  .mock-phone{width:100%;height:620px;border-radius:16px;background:#fff;padding:20px;overflow:hidden;position:relative;border:1px solid var(--border);box-shadow:0 4px 12px rgba(0,0,0,0.05)}
+  .chat .bubble{max-width:78%;padding:12px 16px;border-radius:16px;margin:12px 0;display:inline-block;font-size:14px;line-height:1.4}
+  .bot{background:#f1f5f9;color:var(--text-primary);border:1px solid var(--border)}
+  .client{background:var(--gradient);color:#fff;margin-left:auto}
+  
+  /* Sections */
+  .section{margin:80px 0}
+  .section-title{text-align:center;margin-bottom:48px;color:var(--text-primary)}
+  .section-title h2{font-size:36px;margin-bottom:16px;font-weight:700}
+  .section-title p{color:var(--text-secondary);max-width:600px;margin:0 auto;font-size:18px}
+  
+  /* Process */
+  .process{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:40px}
+  .process-step{text-align:center;padding:24px}
+  .step-number{width:56px;height:56px;border-radius:50%;background:var(--gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;margin:0 auto 20px;font-size:18px}
+  
+  /* Testimonials */
+  .testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+  .testimonial{background:#fff;padding:28px;border-radius:12px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+  .testimonial-text{font-style:italic;margin-bottom:20px;color:var(--text-secondary);line-height:1.6}
+  .testimonial-author{display:flex;align-items:center;gap:12px}
+  .author-avatar{width:44px;height:44px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-weight:600;color:#fff}
+  
+  /* FAQ */
+  .faq{max-width:800px;margin:0 auto}
+  .faq-item{margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:20px}
+  .faq-question{font-weight:600;color:var(--text-primary);cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:16px;padding:8px 0}
+  .faq-answer{margin-top:12px;color:var(--text-secondary);display:none;line-height:1.6}
+  
+  /* Industries Grid */
+  .industries{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:40px}
+  .industry{background:#fff;padding:20px;border-radius:12px;text-align:center;border:1px solid var(--border);transition:all 0.3s;box-shadow:0 1px 3px rgba(0,0,0,0.03)}
+  .industry:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+  
+  /* Benefits */
+  .benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:40px}
+  .benefit{background:#fff;padding:24px;border-radius:12px;border-left:4px solid var(--accent);box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+  .benefit-icon{font-size:28px;margin-bottom:16px}
+  
+  /* Bot Examples */
+  .bot-examples{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:40px}
+  .bot-example{background:#fff;padding:24px;border-radius:12px;text-align:center;border:1px solid var(--border);transition:all 0.3s;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.03)}
+  .bot-example:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+  
+  /* Footer */
+  footer{padding:60px 0 40px;color:var(--text-secondary);text-align:center;border-top:1px solid var(--border);margin-top:60px}
+  .footer-links{display:flex;justify-content:center;gap:24px;margin:24px 0}
+  .footer-links a{color:var(--accent);text-decoration:none;font-weight:500}
+  
+  /* Floating CTA */
+  .floating{position:fixed;right:24px;bottom:24px;background:var(--accent);color:#fff;padding:16px 24px;border-radius:50px;box-shadow:0 8px 24px rgba(30,64,175,0.3);text-decoration:none;display:flex;align-items:center;gap:10px;z-index:1000;font-weight:600;font-size:15px}
+  
+  /* Utility */
+  .small{font-size:14px;color:var(--text-secondary);line-height:1.5}
+  .success{color:var(--success);font-weight:600}
+  .error{color:var(--error)}
+  .text-center{text-align:center}
+  .mb-20{margin-bottom:20px}
+  .mt-30{margin-top:30px}
+  
+  /* Animations */
+  .fade{animation:fade .6s ease both}
+  @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  
+  /* Responsive */
+  @media(max-width:920px){
+    .hero{grid-template-columns:1fr;padding:32px 0}
+    .mock-phone{height:400px}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .process{grid-template-columns:1fr}
+    .industries{grid-template-columns:repeat(2,1fr)}
+    .bot-examples{grid-template-columns:repeat(2,1fr)}
+    .section{margin:60px 0}
+    .section-title h2{font-size:28px}
+  }
+  
+  @media(max-width:640px){
+    .stats{grid-template-columns:1fr}
+    .industries{grid-template-columns:1fr}
+    .bot-examples{grid-template-columns:1fr}
+    .features{grid-template-columns:1fr}
+    .benefits{grid-template-columns:1fr}
+    .testimonials{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="logo">AI</div>
+      <div>
+        <h1>Goldenium AI Solutions</h1>
+        <div class="small">Корпоративная автоматизация · AI-боты · Бизнес-процессы</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="langs">
+        <button class="langbtn" data-lang="ru">RU</button>
+        <button class="langbtn" data-lang="en">EN</button>
+        <button class="langbtn" data-lang="es">ES</button>
+      </div>
+      <div class="settings" id="settingsBtn" title="Настройки">⚙</div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div>
+      <div class="card fade">
+        <div class="badge">🚀 ВНЕДРЕНИЕ ЗА 24 ЧАСА</div>
+        <h2 id="title">Корпоративная автоматизация с искусственным интеллектом</h2>
+        <p class="lead" id="subtitle">Внедряем AI-решения для автоматизации бизнес-процессов. <strong>Снижаем операционные расходы на 40%</strong> по данным наших клиентов</p>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-number">-40%</div>
+            <div class="stat-label">Операционные расходы</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Автоматизация процессов</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">1 день</div>
+            <div class="stat-label">Срок внедрения</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">1-3</div>
+            <div class="stat-label">FTE экономия</div>
+          </div>
+        </div>
+
+        <form id="leadForm" class="fade">
+          <div class="row">
+            <input type="text" id="clientName" placeholder="Ваше имя" required />
+            <input type="tel" id="clientPhone" placeholder="+7 900 000-00-00" required />
+          </div>
+          <div class="row">
+            <select id="businessType">
+              <option value="production">Производство</option>
+              <option value="logistics">Логистика и транспорт</option>
+              <option value="retail">Оптово-розничная торговля</option>
+              <option value="construction">Строительство и аренда</option>
+              <option value="medical">Медицина и лаборатории</option>
+              <option value="education">Образование и консалтинг</option>
+              <option value="services">Услуги и B2B</option>
+              <option value="beauty">Бьюти-индустрия</option>
+            </select>
+            <select id="currency" style="max-width:160px">
+              <option value="RUB">₽ RUB</option>
+              <option value="USD">$ USD</option>
+              <option value="EUR">€ EUR</option>
+            </select>
+          </div>
+          <textarea id="note" placeholder="Опишите задачу для автоматизации..."></textarea>
+          <div style="display:flex;gap:12px;align-items:center;margin-top:20px">
+            <button type="submit" class="btn btn-lg">📞 Получить консультацию</button>
+            <div id="formStatus" class="small"></div>
+          </div>
+          <div class="small" style="margin-top:12px;color:var(--accent)">
+            ⏱️ Свяжемся в течение 15 минут для анализа задач
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div>
+      <div class="card mock-phone fade">
+        <div style="display:flex;justify-content:space-between;align-items:center;color:var(--text-secondary);margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border)">
+          <div style="font-weight:600">Корпоративный AI-ассистент</div>
+          <div class="small" style="color:var(--success)">Online</div>
+        </div>
+        <div class="chat">
+          <div class="bubble bot">👋 Добро пожаловать! Я ваш AI-помощник для автоматизации бизнес-процессов. Чем могу помочь?</div>
+          <div class="bubble client">Нужно автоматизировать запись клиентов</div>
+          <div class="bubble bot">Понимаю. Настроим систему бронирования с интеграцией в ваш календарь и CRM</div>
+          <div class="bubble client">И обработку входящих заявок</div>
+          <div class="bubble bot">✅ Готово! Система будет автоматически обрабатывать заявки 24/7 и передавать в отдел продаж</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- All Benefits Section -->
+  <section class="section">
+    <div class="section-title">
+      <h2>Комплексные бизнес-решения</h2>
+      <p>Автоматизация ключевых процессов предприятия с помощью искусственного интеллекта</p>
+    </div>
+    
+    <div class="benefits">
+      <div class="benefit">
+        <div class="benefit-icon">🤖</div>
+        <h3>Интеллектуальные боты</h3>
+        <p class="small">AI-решения для обработки заявок, консультаций и автоматизации коммуникаций с клиентами</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">🎤</div>
+        <h3>Голосовые решения</h3>
+        <p class="small">Автоматические звонки, напоминания, сбор обратной связи и проведение опросов</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">🔄</div>
+        <h3>Интеграции</h3>
+        <p class="small">Подключение к CRM, ERP и другим корпоративным системам через Make.com и API</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">📊</div>
+        <h3>Аналитика и отчетность</h3>
+        <p class="small">Мониторинг эффективности, автоматические отчеты и аналитика в реальном времени</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">💰</div>
+        <h3>Оптимизация расходов</h3>
+        <p class="small">Снижение затрат на персонал за счет автоматизации рутинных операций</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">⚡</div>
+        <h3>Круглосуточная работа</h3>
+        <p class="small">Непрерывная обработка запросов без перерывов и выходных</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">🎯</div>
+        <h3>Точность данных</h3>
+        <p class="small">Минимизация человеческих ошибок и повышение качества обработки информации</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">🚀</div>
+        <h3>Масштабируемость</h3>
+        <p class="small">Легкая адаптация под рост компании и изменение бизнес-процессов</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Business Benefits -->
+  <section class="section">
+    <div class="section-title">
+      <h2>Бизнес-преимущества</h2>
+      <p>Измеримые результаты и конкретные выгоды для вашего предприятия</p>
+    </div>
+    
+    <div class="features">
+      <div class="feature">
+        <strong>⏱ Оптимизация времени</strong>
+        <div class="small">Сокращение времени обработки запросов в 5-10 раз за счет автоматизации рутинных операций</div>
+      </div>
+      <div class="feature">
+        <strong>💰 Снижение затрат</strong>
+        <div class="small">Экономия на фонде оплаты труда 1-3 сотрудников при сохранении качества обслуживания</div>
+      </div>
+      <div class="feature">
+        <strong>📊 Прозрачность процессов</strong>
+        <div class="small">Полный контроль и аналитика всех бизнес-процессов в реальном времени</div>
+      </div>
+      <div class="feature">
+        <strong>🚀 Рост эффективности</strong>
+        <div class="small">Увеличение количества обработанных заявок и повышение конверсии в продажи</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries -->
+  <section class="section">
+    <div class="section-title">
+      <h2>Отраслевые решения</h2>
+      <p>Специализированные AI-решения для различных секторов экономики</p>
+    </div>
+    
+    <div class="industries">
+      <div class="industry">
+        <div style="font-size:28px;margin-bottom:12px">🏭</div>
+        <strong>Промышленность</strong>
+        <div class="small">Автоматизация производственных процессов и логистики</div>
+      </div>
+      <div class="industry">
+        <div style="font-size:28px;margin-bottom:12px">🚚</div>
+        <strong>Логистика</strong>
+        <div class="small">Управление цепочками поставок и транспортными операциями</div>
+      </div>
+      <div class="industry">
+        <div style="font-size:28px;margin-bottom:12px">🛍️</div>
+        <strong>Ритейл</strong>
+        <div class="small">Автоматизация продаж, обслуживания и управления запасами</div>
+      </div>
+      <div class="industry">
+        <div style="font-size:28px;margin-bottom:12px">🏗️</div>
+        <strong>Строительство</strong>
+        <div class="small">Управление проектами и автоматизация документооборота</div>
+      </div>
+      <div class="industry">
+        <div style="font-size:28px;margin-bottom:12px">🏥</div>
+        <strong>Здравоохранение</strong>
+        <div class="small">Запись пациентов, напоминания и управление медицинскими данными</div>
+      </div>
+      <div class="industry">
+        <div style="font-size:28px;margin-bottom:12px">🎓</div>
+        <strong>Образование</strong>
+        <div class="small">Автоматизация приема заявок и управления образовательным процессом</div>
+      </div>
+      <div class="industry">
+        <div style="font-size:28px;margin-bottom:12px">💼</div>
+        <strong>Услуги</strong>
+        <div class="small">B2B и B2C сервисы, консалтинг и профессиональные услуги</div>
+      </div>
+      <div class="industry">
+        <div style="font-size:28px;margin-bottom:12px">💅</div>
+        <strong>Бьюти-индустрия</strong>
+        <div class="small">Запись клиентов, управление расписанием и программами лояльности</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section">
+    <div class="section-title">
+      <h2>Процесс внедрения</h2>
+      <p>Четкий и прозрачный процесс интеграции AI-решений в ваш бизнес</p>
+    </div>
+    
+    <div class="process">
+      <div class="process-step">
+        <div class="step-number">1</div>
+        <h3>Анализ</h3>
+        <p class="small">Глубокий анализ бизнес-процессов и определение точек автоматизации</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">2</div>
+        <h3>Проектирование</h3>
+        <p class="small">Разработка технического решения и согласование архитектуры системы</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">3</div>
+        <h3>Внедрение</h3>
+        <p class="small">Настройка и запуск AI-решений с интеграцией в существующие процессы</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">4</div>
+        <h3>Поддержка</h3>
+        <p class="small">Обучение команды и техническое сопровождение работы системы</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Guarantees -->
+  <section class="section">
+    <div class="card text-center">
+      <h2>Корпоративные гарантии</h2>
+      <p class="lead mb-20">Официальная работа с полным пакетом документов и профессиональной поддержкой</p>
+      <div class="features" style="grid-template-columns:repeat(3,1fr);gap:20px">
+        <div class="feature">
+          <strong>📄 Договорные отношения</strong>
+          <div class="small">Официальный договор оказания услуг со всеми гарантиями</div>
+        </div>
+        <div class="feature">
+          <strong>🛡️ Техническая поддержка</strong>
+          <div class="small">Круглосуточная поддержка и оперативное решение вопросов</div>
+        </div>
+        <div class="feature">
+          <strong>📚 Документация</strong>
+          <div class="small">Полная техническая и пользовательская документация</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section">
+    <div class="section-title">
+      <h2>Отзывы клиентов</h2>
+      <p>Реальные результаты предприятий после внедрения наших решений</p>
+    </div>
+    
+    <div class="testimonials">
+      <div class="testimonial">
+        <div class="testimonial-text">
+          "Внедрили AI-систему в производственный цех. Автоматизировали учет заказов и коммуникацию с клиентами. Экономия времени менеджеров составила 60%."
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar">М</div>
+          <div>
+            <strong>Михаил Волков</strong>
+            <div class="small">Директор по развитию, Производственная компания</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonial">
+        <div class="testimonial-text">
+          "Бот заменил двух операторов колл-центра. Система автоматически обрабатывает 80% входящих запросов, что позволило перераспределить ресурсы на стратегические задачи."
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar">А</div>
+          <div>
+            <strong>Анна Смирнова</strong>
+            <div class="small">Руководитель отдела продаж, Логистическая компания</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonial">
+        <div class="testimonial-text">
+          "Запустили за 2 дня! Клиенты отмечают скорость ответов, а сотрудники освободились от рутины. Прозрачность процессов выросла в разы."
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar">Д</div>
+          <div>
+            <strong>Дмитрий Иванов</strong>
+            <div class="small">Владелец сети, Розничная торговля</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="section-title">
+      <h2>Вопросы и ответы</h2>
+      <p>Часто задаваемые вопросы о внедрении AI-решений</p>
+    </div>
+    
+    <div class="faq">
+      <div class="faq-item">
+        <div class="faq-question">
+          Какова стоимость внедрения AI-решений?
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          Стоимость зависит от сложности задач и масштаба автоматизации. Базовые решения начинаются от 25 000₽. После анализа ваших бизнес-процессов подготовим детальный расчет.
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          Сколько времени занимает внедрение?
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          Большинство решений мы внедряем за 1-3 рабочих дня. Сложные интеграции с корпоративными системами могут занять до 5-7 дней.
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          Требуются ли технические знания для работы с системой?
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          Нет, мы настраиваем все под ключ и проводим обучение ваших сотрудников. Интерфейсы управления интуитивно понятны и не требуют специальных знаний.
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          Какая техническая поддержка предоставляется?
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          Включаем 30 дней бесплатной поддержки после внедрения. Далее доступны различные пакеты техподдержки, включая круглосуточное сопровождение для корпоративных клиентов.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="section text-center">
+    <div class="card">
+      <h2>Готовы к автоматизации бизнеса?</h2>
+      <p class="lead mb-20">Оставьте заявку для получения бесплатной консультации и расчета стоимости внедрения</p>
+      <button class="btn btn-lg" onclick="document.getElementById('leadForm').scrollIntoView({behavior: 'smooth'})">
+        📊 Получить расчет
+      </button>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="https://t.me/Goldenium" target="_blank">Telegram</a>
+      <a href="#" onclick="document.getElementById('settingsBtn').click()">Настройки</a>
+      <a href="#faq">Вопросы</a>
+    </div>
+    <div class="small">
+      © 2025 Goldenium AI Solutions — интеллектуальные бизнес-решения<br>
+      Контакты: <a href="https://t.me/Goldenium" style="color:var(--accent);text-decoration:none">@Goldenium</a>
+    </div>
+  </footer>
+</div>
+
+<!-- Floating CTA -->
+<a class="floating" href="https://t.me/Goldenium" target="_blank">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.14.14-.26.26-.534.26l.213-3.053 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.136-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
+  </svg>
+  Написать в Telegram
+</a>
+
+<!-- Settings Modal -->
+<div id="settingsModal" style="display:none;position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;padding:28px;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.15);z-index:9999;max-width:500px;width:90%;border:1px solid var(--border)">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+    <strong style="color:var(--text-primary);font-size:18px">Настройки интеграции</strong>
+    <button id="closeSettings" style="background:transparent;border:0;color:var(--text-secondary);cursor:pointer;font-size:20px">✕</button>
+  </div>
+  <div style="margin-top:16px">
+    <label class="small" style="font-weight:500">BOT TOKEN (из @BotFather)</label>
+    <input id="botToken" placeholder="123456:ABC-DEF..." style="width:100%;margin-top:8px;padding:12px;border:1px solid var(--border);border-radius:10px;background:#fff;font-size:14px" />
+  </div>
+  <div style="margin-top:16px">
+    <label class="small" style="font-weight:500">CHAT ID (для уведомлений)</label>
+    <input id="chatId" placeholder="123456789" style="width:100%;margin-top:8px;padding:12px;border:1px solid var(--border);border-radius:10px;background:#fff;font-size:14px" />
+  </div>
+  <div style="margin-top:16px">
+    <label class="small" style="font-weight:500">Режим отправки заявок</label>
+    <select id="sendMode" style="width:100%;margin-top:8px;padding:12px;border:1px solid var(--border);border-radius:10px;background:#fff;font-size:14px">
+      <option value="api">Через Bot API (рекомендуется)</option>
+      <option value="deep">Открывать Telegram</option>
+    </select>
+  </div>
+  <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+    <button id="saveSettings" class="btn">Сохранить настройки</button>
+    <button id="testSettings" style="background:var(--card);color:var(--text-primary);padding:12px 18px;border-radius:10px;border:1px solid var(--border);cursor:pointer;font-weight:500">Проверить</button>
+    <button id="clearSettings" style="background:var(--card);color:var(--text-primary);padding:12px 18px;border-radius:10px;border:1px solid var(--border);cursor:pointer;font-weight:500">Очистить</button>
+  </div>
+  <div style="margin-top:16px;color:var(--text-secondary);font-size:13px;line-height:1.5">
+    ⚠ Для тестирования: создайте бота через @BotFather и укажите токен + chat_id для получения уведомлений
+  </div>
+</div>
+
+<script>
+  // Translations
+  const texts = {
+    ru: {
+      title: "Корпоративная автоматизация с искусственным интеллектом",
+      subtitle: "Внедряем AI-решения для автоматизации бизнес-процессов. Снижаем операционные расходы на 40% по данным наших клиентов",
+      namePlaceholder: "Ваше имя",
+      phonePlaceholder: "+7 900 000-00-00",
+      notePlaceholder: "Опишите задачу для автоматизации...",
+      submit: "📞 Получить консультацию",
+      sending: "Отправляем...",
+      success: "Заявка отправлена! Свяжемся в течение 15 минут.",
+      error: "Ошибка отправки, откроем Telegram для связи.",
+      settingsSaved: "Настройки сохранены!",
+      settingsCleared: "Настройки очищены",
+      confirmClear: "Точно очистить настройки?",
+      testSuccess: "Настройки работают!",
+      testError: "Ошибка: проверьте токен и chat_id"
+    },
+    en: {
+      title: "Corporate Automation with Artificial Intelligence",
+      subtitle: "Implement AI solutions for business process automation. Reduce operational costs by 40% according to our clients' data",
+      namePlaceholder: "Your name",
+      phonePlaceholder: "+1 555 000 0000",
+      notePlaceholder: "Describe your automation task...",
+      submit: "📞 Get consultation",
+      sending: "Sending...",
+      success: "Request sent! We'll contact you within 15 minutes.",
+      error: "Send error, opening Telegram for connection.",
+      settingsSaved: "Settings saved!",
+      settingsCleared: "Settings cleared",
+      confirmClear: "Really clear settings?",
+      testSuccess: "Settings work!",
+      testError: "Error: check token and chat_id"
+    },
+    es: {
+      title: "Automatización Corporativa con Inteligencia Artificial",
+      subtitle: "Implementamos soluciones AI para automatización de procesos. Reducimos costos operativos en 40% según datos de clientes",
+      namePlaceholder: "Tu nombre",
+      phonePlaceholder: "+34 600 000 000",
+      notePlaceholder: "Describe tu tarea de automatización...",
+      submit: "📞 Obtener consulta",
+      sending: "Enviando...",
+      success: "Solicitud enviada. Contactaremos en 15 minutos.",
+      error: "Error al enviar, abriendo Telegram para conexión.",
+      settingsSaved: "Configuración guardada!",
+      settingsCleared: "Configuración eliminada",
+      confirmClear: "¿Realmente borrar configuración?",
+      testSuccess: "Configuración funciona!",
+      testError: "Error: verifica token y chat_id"
+    }
+  };
+
+  // Settings management
+  function loadSettings() {
+    return {
+      botToken: localStorage.getItem('gold_bot_token') || '',
+      chatId: localStorage.getItem('gold_chat_id') || '',
+      sendMode: localStorage.getItem('gold_send_mode') || 'deep'
+    };
+  }
+  
+  function saveSettings(obj) {
+    localStorage.setItem('gold_bot_token', obj.botToken || '');
+    localStorage.setItem('gold_chat_id', obj.chatId || '');
+    localStorage.setItem('gold_send_mode', obj.sendMode || 'deep');
+  }
+
+  // Phone validation
+  function validatePhone(phone) {
+    return phone.replace(/\s/g, '').length >= 10;
+  }
+
+  // Test Telegram settings
+  async function testTelegramSettings(token, chatId) {
+    if (!token || !chatId) return false;
+    const url = `https://api.telegram.org/bot${encodeURIComponent(token)}/getMe`;
+    try {
+      const resp = await fetch(url);
+      const data = await resp.json();
+      return data && data.ok;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  // DOM elements
+  const langBtns = document.querySelectorAll('.langbtn');
+  const titleEl = document.getElementById('title');
+  const subtitleEl = document.getElementById('subtitle');
+  const nameInp = document.getElementById('clientName');
+  const phoneInp = document.getElementById('clientPhone');
+  const noteInp = document.getElementById('note');
+  const submitBtn = document.querySelector('.btn[type="submit"]');
+  const formStatus = document.getElementById('formStatus');
+  const settingsBtn = document.getElementById('settingsBtn');
+  const settingsModal = document.getElementById('settingsModal');
+  const closeSettings = document.getElementById('closeSettings');
+  const saveSettingsBtn = document.getElementById('saveSettings');
+  const testSettingsBtn = document.getElementById('testSettings');
+  const clearSettingsBtn = document.getElementById('clearSettings');
+  const botTokenInput = document.getElementById('botToken');
+  const chatIdInput = document.getElementById('chatId');
+  const sendModeSelect = document.getElementById('sendMode');
+
+  // Language handling
+  let lang = 'ru';
+  function applyLang(l) {
+    lang = l;
+    titleEl.textContent = texts[l].title;
+    subtitleEl.textContent = texts[l].subtitle;
+    nameInp.placeholder = texts[l].namePlaceholder;
+    phoneInp.placeholder = texts[l].phonePlaceholder;
+    noteInp.placeholder = texts[l].notePlaceholder;
+    if (submitBtn) submitBtn.innerHTML = texts[l].submit;
+  }
+  
+  langBtns.forEach(btn => {
+    btn.addEventListener('click', () => { 
+      applyLang(btn.dataset.lang); 
+    });
+  });
+
+  // Settings modal
+  settingsBtn.addEventListener('click', () => {
+    const s = loadSettings();
+    botTokenInput.value = s.botToken;
+    chatIdInput.value = s.chatId;
+    sendModeSelect.value = s.sendMode;
+    settingsModal.style.display = 'block';
+  });
+  
+  closeSettings.addEventListener('click', () => settingsModal.style.display = 'none');
+  
+  clearSettingsBtn.addEventListener('click', () => {
+    if (confirm(texts[lang].confirmClear)) {
+      localStorage.removeItem('gold_bot_token');
+      localStorage.removeItem('gold_chat_id');
+      localStorage.removeItem('gold_send_mode');
+      botTokenInput.value = '';
+      chatIdInput.value = '';
+      sendModeSelect.value = 'deep';
+      alert(texts[lang].settingsCleared);
+    }
+  });
+  
+  saveSettingsBtn.addEventListener('click', () => {
+    saveSettings({
+      botToken: botTokenInput.value.trim(),
+      chatId: chatIdInput.value.trim(),
+      sendMode: sendModeSelect.value
+    });
+    settingsModal.style.display = 'none';
+    alert(texts[lang].settingsSaved);
+  });
+  
+  testSettingsBtn.addEventListener('click', async () => {
+    const token = botTokenInput.value.trim();
+    const chatId = chatIdInput.value.trim();
+    if (!token || !chatId) {
+      alert('Заполните токен и chat_id');
+      return;
+    }
+    testSettingsBtn.disabled = true;
+    testSettingsBtn.textContent = 'Проверка...';
+    const isValid = await testTelegramSettings(token, chatId);
+    testSettingsBtn.disabled = false;
+    testSettingsBtn.textContent = 'Проверить';
+    alert(isValid ? texts[lang].testSuccess : texts[lang].testError);
+  });
+
+  // Form submission
+  document.getElementById('leadForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    formStatus.textContent = '';
+    
+    const name = nameInp.value.trim();
+    const phone = phoneInp.value.trim();
+    const note = noteInp.value.trim();
+    const type = document.getElementById('businessType').value;
+    const currency = currencySel.value || 'RUB';
+    
+    if (!name || !phone) {
+      formStatus.textContent = 'Заполните имя и телефон';
+      return;
+    }
+    
+    if (!validatePhone(phone)) {
+      formStatus.textContent = 'Введите корректный номер телефона';
+      return;
+    }
+    
+    // Show loading
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = `${texts[lang].sending} <div style="display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-radius:50%;border-top-color:#fff;animation:spin 1s ease-in-out infinite;margin-left:8px"></div>`;
+    submitBtn.disabled = true;
+
+    // Prepare message
+    const langMap = {ru:'Русский', en:'English', es:'Español'};
+    const message = `🎯 Новая корпоративная заявка\nЯзык: ${langMap[lang]}\nОтрасль: ${type}\nКонтакт: ${name}\nТелефон: ${phone}\nЗадача: ${note}\nВалюта: ${currency}`;
+
+    const s = loadSettings();
+    
+    // Try Telegram API if configured
+    if (s.sendMode === 'api' && s.botToken && s.chatId) {
+      const url = `https://api.telegram.org/bot${encodeURIComponent(s.botToken)}/sendMessage`;
+      const payload = { chat_id: s.chatId, text: message };
+      try {
+        const resp = await fetch(url, { 
+          method: 'POST', 
+          headers: {'Content-Type': 'application/json'}, 
+          body: JSON.stringify(payload) 
+        });
+        const data = await resp.json();
+        if (data && data.ok) {
+          formStatus.innerHTML = `<span class="success">${texts[lang].success}</span>`;
+          nameInp.value = ''; phoneInp.value = ''; noteInp.value = '';
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+          return;
+        }
+      } catch (err) {}
+    }
+    
+    // Fallback to Telegram deep link
+    const deepText = encodeURIComponent(`[Goldenium Corporate] ${message}`);
+    const tgLink = `https://t.me/Goldenium?text=${deepText}`;
+    window.open(tgLink, '_blank');
+    formStatus.innerHTML = `<span class="small">${texts[lang].error}</span>`;
+    
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
+  });
+
+  // FAQ toggle
+  document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+      const answer = question.nextElementSibling;
+      const isVisible = answer.style.display === 'block';
+      answer.style.display = isVisible ? 'none' : 'block';
+      question.querySelector('span').textContent = isVisible ? '+' : '−';
+    });
+  });
+
+  // Initialize
+  applyLang('ru');
+  const s = loadSettings();
+  if (s.botToken) botTokenInput.value = s.botToken;
+  if (s.chatId) chatIdInput.value = s.chatId;
+  if (s.sendMode) sendModeSelect.value = s.sendMode;
+
+  // Close modal on ESC
+  window.addEventListener('keydown', (e) => { 
+    if (e.key === 'Escape') settingsModal.style.display = 'none'; 
+  });
+  
+  // Add spin animation for loading
+  const style = document.createElement('style');
+  style.textContent = `@keyframes spin { to { transform: rotate(360deg); } }`;
+  document.head.appendChild(style);
+</script>
+</body>
+</html>
